@@ -4,24 +4,63 @@ import 'package:attendease/components/my_textfield.dart';
 import 'package:attendease/components/my_button.dart';
 import 'package:attendease/components/square_tile.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   void signUserIn() async {
+    // Show loading indicator
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
-    } catch (e) {
+      Navigator.pop(context); // Dismiss loading indicator
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context); // Dismiss loading indicator
+
       // Handle sign in error
-      print(e);
+      if (e.code == 'user-not-found') {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              title: Text('Incorrect Email'),
+              content: Text('No user found for that email.'),
+            );
+          },
+        );
+      } else if (e.code == 'wrong-password') {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              title: Text('Incorrect Password'),
+              content: Text('The password is incorrect. Please try again.'),
+            );
+          },
+        );
+      }
     }
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +68,6 @@ class LoginPage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            // Added SingleChildScrollView
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -40,7 +78,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 50),
                 const Text(
-                  'Welcome back you\'ve been missed!',
+                  'Welcome back, you\'ve been missed!',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
@@ -58,7 +96,6 @@ class LoginPage extends StatelessWidget {
                   hintText: 'Password',
                   obscureText: true,
                 ),
-                // Forgot password
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -73,7 +110,6 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 25),
-                // Sign in button
                 MyButton(
                   onTap: signUserIn,
                 ),
@@ -96,10 +132,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Divider(
-                          thickness: 0.5,
-                          color: Colors.white,
-                        ),
+                        child: Divider(thickness: 0.5, color: Colors.white),
                       ),
                     ],
                   ),
@@ -109,14 +142,14 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SquareTile(imagePath: 'lib/images/google.png'),
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
                   ],
                 ),
                 const SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Not a member?',
                       style: TextStyle(color: Colors.black),
                     ),
@@ -129,7 +162,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
