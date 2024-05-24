@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
           builder: (context) {
             return const AlertDialog(
               title: Text('Incorrect Password'),
-              content: Text('The password is incorrect. Please try again.'),
+              content: Text('The password is incorrect.Please try again.'),
             );
           },
         );
