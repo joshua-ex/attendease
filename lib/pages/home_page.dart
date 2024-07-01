@@ -24,7 +24,8 @@ class _HomePageState extends State<HomePage> {
       print('Message data: ${message.data}');
 
       // Customize how to handle the notification based on your app's requirements
-      // For example, show a dialog, update UI, etc.
+      // For example,
+      //show a dialog, update UI, etc.
     });
   }
 
