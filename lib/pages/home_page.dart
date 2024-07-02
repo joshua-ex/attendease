@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           context, MaterialPageRoute(builder: (context) => const HomePage()));
     } else if (index == 1) {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const LeaveDetailsPage()));
+          context, MaterialPageRoute(builder: (context) => LeaveDetailsPage()));
     }
   }
 
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('AttendEase'),
         actions: [
           IconButton(
             onPressed: () => signUserOut(context),
@@ -88,8 +88,8 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text(
                       user.displayName ?? emailPrefix,
-                      style:
-                          const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     const Text(
                       '',
@@ -105,7 +105,8 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   DateFormat('MMMM yyyy').format(currentDate),
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -201,7 +202,8 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             Text(time, style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 5),

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'home_page.dart';
 
 class LeaveDetailsPage extends StatelessWidget {
-  const LeaveDetailsPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Leave Details'),
+        title: Text('Leave Details'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -18,7 +17,7 @@ class LeaveDetailsPage extends StatelessWidget {
             GridView.count(
               crossAxisCount: 2,
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               children: [
                 _buildLeaveTile('Leave Balance', '20', Colors.lightBlue),
                 _buildLeaveTile('Leave Approved', '2', Colors.lightGreen),
@@ -26,33 +25,33 @@ class LeaveDetailsPage extends StatelessWidget {
                 _buildLeaveTile('Leave Cancelled', '10', Colors.redAccent),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             // Tabs Section
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TextButton(
                   onPressed: () {},
-                  child: const Text('Upcoming',
+                  child: Text('Upcoming',
                       style: TextStyle(fontSize: 18, color: Colors.blue)),
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: const Text('Past',
+                  child: Text('Past',
                       style: TextStyle(fontSize: 18, color: Colors.grey)),
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: const Text('Team Leave',
+                  child: Text('Team Leave',
                       style: TextStyle(fontSize: 18, color: Colors.grey)),
                 ),
               ],
             ),
             // Leave Details Section
-            const Card(
+            Card(
               margin: EdgeInsets.all(8),
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -81,6 +80,14 @@ class LeaveDetailsPage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+              },
+              child: Text('Back to Home'),
+            ),
           ],
         ),
       ),
@@ -89,7 +96,7 @@ class LeaveDetailsPage extends StatelessWidget {
 
   Widget _buildLeaveTile(String title, String count, Color color) {
     return Card(
-      margin: const EdgeInsets.all(8),
+      margin: EdgeInsets.all(8),
       color: color.withOpacity(0.2),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -97,9 +104,9 @@ class LeaveDetailsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 10),
-            Text(count, style: const TextStyle(fontSize: 16)),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: 10),
+            Text(count, style: TextStyle(fontSize: 16)),
           ],
         ),
       ),

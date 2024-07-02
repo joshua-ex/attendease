@@ -67,7 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -75,9 +75,10 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 25),
-                const Icon(
-                  Icons.lock,
-                  size: 50,
+                Image.asset(
+                  'lib/images/lock.png', // Replace with your actual path
+                  width: 70,
+                  height: 70,
                 ),
                 const SizedBox(height: 25),
                 const Text(
