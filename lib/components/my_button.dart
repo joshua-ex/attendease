@@ -8,6 +8,7 @@ class MyButton extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.text,
+    required MaterialColor color,
   });
 
   @override
@@ -18,7 +19,7 @@ class MyButton extends StatelessWidget {
         padding: const EdgeInsets.all(25),
         margin: const EdgeInsets.symmetric(horizontal: 25),
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: Colors.lightBlue,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(

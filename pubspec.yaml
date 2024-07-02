@@ -39,6 +39,7 @@ dependencies:
   firebase_messaging: ^14.9.3
   overlay_support: ^2.1.0
   google_sign_in: ^5.4.2
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +61,7 @@ flutter:
 
   assets:
     - lib/images/google.png
+    - lib/images/lock.png
 
   # To add assets to your application, add an assets section, like this:
 

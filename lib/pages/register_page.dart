@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:attendease/components/my_textfield.dart';
 import 'package:attendease/components/my_button.dart';
 import 'package:attendease/components/square_tile.dart';
-import 'package:flutter/widgets.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -110,6 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 MyButton(
                   text: "Sign Up",
                   onTap: signUserUp,
+                  color: Colors.lightBlue,
                 ),
                 const SizedBox(height: 35),
                 const Padding(
@@ -142,14 +142,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     SquareTile(
                         onTap: () => AuthService().signInWithGoogle(),
                         imagePath: 'lib/images/google.png'),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                   ],
                 ),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Already have an account?',
                       style: TextStyle(color: Colors.black),
                     ),
