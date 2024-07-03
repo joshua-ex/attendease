@@ -76,13 +76,13 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 const SizedBox(height: 25),
                 Image.asset(
-                  'lib/images/lock.png', // Replace with your actual path
-                  width: 70,
-                  height: 70,
+                  'lib/images/App_logopng.png', // Replace with your actual path
+                  width: 150,
+                  height: 150,
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 15),
                 const Text(
-                  'Let\'s create an account fo you!',
+                  'Let\'s create an account for you!',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18,
@@ -112,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   onTap: signUserUp,
                   color: Colors.lightBlue,
                 ),
-                const SizedBox(height: 35),
+                const SizedBox(height: 20),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -136,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -160,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: const Text(
                         'Login now',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 85, 35, 223),
                           fontWeight: FontWeight.bold,
                         ),
                       ),

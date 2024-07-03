@@ -71,13 +71,13 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 const SizedBox(height: 25),
                 Image.asset(
-                  'lib/images/lock.png', // Replace with your actual path
-                  width: 70,
-                  height: 70,
+                  'lib/images/App_logopng.png', // Replace with your actual path
+                  width: 150,
+                  height: 150,
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 15),
                 const Text(
-                  'Welcome to AttendEase: Faculty Edition',
+                  'Login',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.lightBlue,
                   onTap: signUserIn,
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 40),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text(
                         'Register now',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 85, 35, 223),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
