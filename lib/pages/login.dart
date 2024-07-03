@@ -42,12 +42,19 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void showErrorMessage(String message) {
+  void showErrorMessage(String errorCode) {
+    String message;
+    if (errorCode == 'channel-error') {
+      message = 'Missing Credentials';
+    } else {
+      message = errorCode;
+    }
+
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: const Color.fromARGB(255, 59, 74, 211),
           title: Center(
             child: Text(
               message,

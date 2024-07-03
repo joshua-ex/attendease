@@ -47,7 +47,14 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  void showErrorMessage(String message) {
+  void showErrorMessage(String errorCode) {
+    String message;
+    if (errorCode == 'channel-error') {
+      message = 'Missing credentials';
+    } else {
+      message = errorCode;
+    }
+
     showDialog(
       context: context,
       builder: (context) {
