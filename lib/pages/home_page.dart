@@ -1,5 +1,6 @@
+import 'package:attendease/services/notification_services.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +8,6 @@ import 'package:intl/intl.dart';
 
 import 'package:attendease/pages/auth_page.dart';
 import 'package:attendease/pages/leave_details_page.dart';
-import 'package:attendease/firebase_options.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   final user = FirebaseAuth.instance.currentUser!;
   final emailPrefix = FirebaseAuth.instance.currentUser!.email!.split('@')[0];
 
@@ -25,10 +24,13 @@ class _HomePageState extends State<HomePage> {
   DateTime? checkInTime;
   DateTime? checkOutTime;
 
+  NotificationServices notificationServices = NotificationServices();
+
   @override
   void initState() {
     super.initState();
 
+    notificationServices.requestNotificationPermission();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Got a message whilst in the foreground!');
       print('Message data: ${message.data}');

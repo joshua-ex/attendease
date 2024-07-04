@@ -1,7 +1,6 @@
 import 'package:attendease/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:attendease/pages/auth_page.dart';
 
 void main() async {
@@ -9,12 +8,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-  NotificationSettings settings = await messaging.requestPermission();
-
-  print(
-      'User granted permission: ${settings.authorizationStatus == AuthorizationStatus.authorized}');
 
   runApp(const MyApp());
 }
