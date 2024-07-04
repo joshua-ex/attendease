@@ -1,8 +1,8 @@
-import 'package:attendease/pages/auth_page.dart';
+import 'package:attendease/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'firebase_options.dart'; // Assuming this file provides Firebase options
+import 'package:attendease/pages/auth_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

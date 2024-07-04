@@ -1,8 +1,12 @@
+import 'package:attendease/pages/auth_page.dart';
+import 'package:attendease/pages/leave_details_page.dart'; // Ensure this import is correct
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:attendease/firebase_options.dart'; // Ensure this import is correct
+import 'package:cloud_firestore/cloud_firestore.dart'; // Add this import
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
-import 'leave_details_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   final emailPrefix = FirebaseAuth.instance.currentUser!.email!.split('@')[0];
 
   DateTime currentDate = DateTime.now();
-  DateTime checkInTime = DateTime.now();
+  DateTime? checkInTime;
 
   @override
   void initState() {
@@ -32,6 +36,21 @@ class _HomePageState extends State<HomePage> {
   void signUserOut(BuildContext context) {
     FirebaseAuth.instance.signOut();
     Navigator.of(context).popUntil((route) => route.isFirst);
+  }
+
+  Future<void> _checkIn() async {
+    if (checkInTime == null || checkInTime!.day != DateTime.now().day) {
+      setState(() {
+        checkInTime = DateTime.now();
+      });
+
+      // Save check-in time to Firestore
+      await FirebaseFirestore.instance.collection('checkins').add({
+        'userId': user.uid,
+        'checkInTime': checkInTime,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+    }
   }
 
   List<DateTime> getCurrentWeekDates() {
@@ -148,10 +167,18 @@ class _HomePageState extends State<HomePage> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                _buildAttendanceTile('Check In',
-                    DateFormat('hh:mm a').format(checkInTime), 'On Time'),
-                _buildAttendanceTile('Check Out', '07:00 pm', 'Go Home'),
-                _buildAttendanceTile('Total Days', '28', 'Working Days'),
+                GestureDetector(
+                  onTap: _checkIn,
+                  child: _buildAttendanceTile(
+                    'Check In',
+                    checkInTime != null
+                        ? DateFormat('hh:mm a').format(checkInTime!)
+                        : 'Not checked in',
+                    'Tap to Check In',
+                  ),
+                ),
+                _buildAttendanceTile('Check Out', '06:00 pm', 'Go Home'),
+                _buildAttendanceTile('Total Days', '26', 'Working Days'),
               ],
             ),
             const SizedBox(height: 20),
@@ -173,9 +200,13 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               leading: const Icon(Icons.check_circle, color: Colors.green),
               title: const Text('Check In'),
-              subtitle: Text(DateFormat('MMMM d, yyyy').format(checkInTime)),
-              trailing: Text(DateFormat('hh:mm a').format(checkInTime),
-                  style: const TextStyle(color: Colors.green)),
+              subtitle: checkInTime != null
+                  ? Text(DateFormat('MMMM d, yyyy').format(checkInTime!))
+                  : null,
+              trailing: checkInTime != null
+                  ? Text(DateFormat('hh:mm a').format(checkInTime!),
+                      style: const TextStyle(color: Colors.green))
+                  : null,
             ),
           ],
         ),
