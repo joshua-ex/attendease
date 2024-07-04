@@ -31,6 +31,11 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     notificationServices.requestNotificationPermission();
+
+    notificationServices.isTokenRefresh();
+    notificationServices.getDeviceToken().then((value) {
+      print('device token : ${value}');
+    });
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Got a message whilst in the foreground!');
       print('Message data: ${message.data}');
