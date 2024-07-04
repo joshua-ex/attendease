@@ -35,9 +35,13 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void signUserOut(BuildContext context) {
-    FirebaseAuth.instance.signOut();
-    Navigator.of(context).popUntil((route) => route.isFirst);
+  void signUserOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => AuthPage()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   Future<void> _checkIn() async {
@@ -56,6 +60,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _checkOut() async {
+    if (checkInTime == null) {
+      // Show a message to the user indicating that check-in is required before check-out
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('You need to check in before checking out.'),
+        ),
+      );
+      return;
+    }
+
     if (checkOutTime == null || checkOutTime!.day != DateTime.now().day) {
       setState(() {
         checkOutTime = DateTime.now();
