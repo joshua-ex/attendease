@@ -1,7 +1,5 @@
 import 'package:attendease/services/notification_services.dart';
 import 'package:flutter/material.dart';
-
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
@@ -32,13 +30,13 @@ class _HomePageState extends State<HomePage> {
 
     notificationServices.requestNotificationPermission();
 
-    notificationServices.isTokenRefresh();
+    notificationServices.firebaseInit();
+
+    notificationServices.getDeviceToken();
+
+    //notificationServices.isTokenRefresh();
     notificationServices.getDeviceToken().then((value) {
       print('device token : ${value}');
-    });
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('Got a message whilst in the foreground!');
-      print('Message data: ${message.data}');
     });
   }
 
